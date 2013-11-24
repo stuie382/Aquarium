@@ -30,12 +30,12 @@ public class Fish {
    public void swim() {
       if ((random.nextInt() % 7) <= 1) {
 
-         velocity.x += random.nextInt() % 4;
+         velocity.x += (random.nextInt() % 4) / 2;
 
          velocity.x = Math.min(velocity.x, 8);
          velocity.x = Math.max(velocity.x, -8);
 
-         velocity.y += random.nextInt() % 4;
+         velocity.y += (random.nextInt() % 4) / 2;
 
          velocity.y = Math.min(velocity.y, 8);
          velocity.y = Math.max(velocity.y, -8);

@@ -6,22 +6,20 @@ import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
 public class Aquarium extends Frame implements Runnable {
 
-   private static final long serialVersionUID = 6566768270951042933L;
+   private static final long serialVersionUID = 6613901281694354973L;
    private Image             aquariumImage, memoryImage;
    private Image[]           fishImages       = new Image[2];
    private Thread            thread;
    private MediaTracker      tracker;
    private Graphics          memoryGraphics;
-   private int               numberFish       = 5;
-   private int               sleepTime        = 110;
-   private List<Fish>        fishes           = new ArrayList<Fish>();
+   private int               numberFish       = 12;
+   private int               sleepTime        = 60;
+   private Fish[]            fishes           = new Fish[numberFish];
    private boolean           runOK            = true;
 
    public static void main(String[] args) throws IOException {
@@ -75,26 +73,20 @@ public class Aquarium extends Frame implements Runnable {
                                       0 + getInsets().top,
                                       getSize().width - (getInsets().left + getInsets().right),
                                       getSize().height - (getInsets().top + getInsets().bottom));
-
       for (int loopIndex = 0; loopIndex < numberFish; loopIndex++) {
-
-         fishes.add(new Fish(fishImages[0], fishImages[1], edges, this));
+         fishes[loopIndex] = new Fish(fishImages[0], fishImages[1], edges, this);
          try {
             Thread.sleep(20);
          } catch (Exception exp) {
             System.out.println(exp.getMessage());
          }
       }
-
       Fish fish;
-
       while (runOK) {
-
          for (int loopIndex = 0; loopIndex < numberFish; loopIndex++) {
-            fish = fishes.get(loopIndex);
+            fish = fishes[loopIndex];
             fish.swim();
          }
-
          try {
             Thread.sleep(sleepTime);
          } catch (Exception exp) {
@@ -109,9 +101,8 @@ public class Aquarium extends Frame implements Runnable {
       memoryGraphics.drawImage(aquariumImage, 0, 0, this);
 
       for (int loopIndex = 0; loopIndex < numberFish; loopIndex++) {
-         fishes.get(loopIndex).drawFishImage(memoryGraphics);
+         fishes[loopIndex].drawFishImage(memoryGraphics);
       }
-
       g.drawImage(memoryImage, 0, 0, this);
    }
 }
