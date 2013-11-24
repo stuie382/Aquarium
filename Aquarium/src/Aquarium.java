@@ -37,7 +37,7 @@ public class Aquarium extends Frame implements Runnable {
       fishImages[1] = ImageIO.read(getClass().getResourceAsStream("fish2.gif"));
       tracker.addImage(fishImages[1], 0);
 
-      aquariumImage = ImageIO.read(getClass().getResourceAsStream("bubbles.gif"));
+      aquariumImage = ImageIO.read(getClass().getResourceAsStream("tank.png"));
       tracker.addImage(aquariumImage, 0);
 
       try {
